@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Recommendations</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: #f8f9fa;
+            padding: 50px;
+            font-family: 'Roboto', sans-serif;
+        }
+        .recommendations-container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .restaurant-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .restaurant-item {
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .restaurant-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+        .restaurant-item img {
+            border-radius: 8px;
+            width: 100%;
+            height: auto;
+        }
+        .restaurant-item h4 {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        .btn-primary {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+        .btn-primary:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+        .navbar-brand {
+            font-weight: bold;
+        }
+        .navbar-nav .nav-link {
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Restaurant Recs</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ url_for('main.index') }}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('main.index') }}">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('main.index') }}">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Recommendations Section -->
+    <div class="container">
+        <h1 class="text-center mb-4">Recommended Restaurants</h1>
+        <div class="recommendations-container mx-auto">
+            <ul class="restaurant-list">
+                {% for index, row in recommendations.iterrows() %}
+                <li class="restaurant-item">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="restaurant-image" data-index="{{ index }}">
+                                <img src="https://via.placeholder.com/400x300" alt="Restaurant Image" class="img-fluid rounded">
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <h4>Restaurant Name: {{ row['Restaurant Name'] }}</h4>
+                            <p><strong>Cuisine:</strong> {{ row['Cuisines'] }}</p>
+                            <p><strong>Price Range:</strong> {{ row['Price range'] }}</p>
+                            <p>Some good amount of Italian cuisines.</p>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+            <a href="{{ url_for('main.index') }}" class="btn btn-primary btn-block mt-4">Back to Home</a>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        const accessKey = 'UNSPALSH_API_KEY';
+
+        const fetchImages = async () => {
+            try {
+                const response = await fetch(`https://api.unsplash.com/photos/random?count={{ recommendations|length }}&client_id=${accessKey}&query=restaurant,food`);
+                const data = await response.json();
+                
+                document.querySelectorAll('.restaurant-image').forEach((element, index) => {
+                    const img = element.querySelector('img');
+                    img.src = data[index].urls.regular;
+                    img.alt = data[index].alt_description;
+                });
+            } catch (error) {
+                console.error('Error fetching images from Unsplash:', error);
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', fetchImages);
+    </script>
+</body>
+</html>
