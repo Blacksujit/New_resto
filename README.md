@@ -34,6 +34,8 @@ https://github.com/Blacksujit/Restaurant_Recommendation_using_ML/assets/14880581
 
 ## Folder Structure:
 
+```
+
 restaurant_recommendation_system/
 │
 ├── app/
@@ -63,6 +65,9 @@ restaurant_recommendation_system/
 |── requirements.txt
 |── ML_model.ipynb   
 ├── run.py
+
+
+```
 
 ## Dataset Information
 
