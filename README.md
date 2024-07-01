@@ -12,11 +12,13 @@ the unsplash image api is used for constant and dynamic image generation you can
 
 ---> navigate to this link [Unsplash Image](https://unsplash.com/developers)
 
+
 ## Web Page (Images & video Links):
 
 ## Video Link:
 
-<video controls src="20240701-1212-29.8469466.mp4" title="Title"></video>
+https://github.com/Blacksujit/Restaurant_Recommendation_using_ML/assets/148805811/be14242e-f12c-4e89-bb7b-6387991a65ab
+
 
 ## Images :
 
