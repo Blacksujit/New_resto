@@ -76,8 +76,11 @@ The predictive model was trained on the [Restaurant Rating Dataset](https://www.
 ## Features
 
 - **Backend**: Built with Flask, handling HTTP requests and integrating with the ML model.
+
 - **Machine Learning Model**: Trained to predict restaurant recommendations based on cuisine and price range.
+
 - **Dynamic Frontend**: Allows users to input their preferences and receive real-time recommendations.
+
 - **Integration**: Seamless integration of Flask backend with a dynamic  frontend for a responsive user interface.
 
 ## Setup
@@ -89,7 +92,7 @@ Follow these steps to set up the Restaurant Recommendation System locally:
 - Python (3.6 or higher)
 - Flask
 - Scikit-learn (for ML model)
-- React.js (for frontend, if applicable)
+
 
 ### Installation
 
